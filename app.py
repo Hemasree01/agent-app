@@ -5,7 +5,7 @@ st.set_page_config(page_title="AI Search Widget", page_icon="🔍", layout="wide
 
 st.title("🔍 AI Search Widget Integration")
 
-# HTML Code for Google AI Search Widget
+# HTML Code for Google AI Search Widget (Updated)
 search_widget_html = """
 <!DOCTYPE html>
 <html lang="en">
@@ -17,27 +17,37 @@ search_widget_html = """
     <script src="https://cloud.google.com/ai/gen-app-builder/client?hl=en_US"></script>
 
     <style>
-        /* Styling for the search input */
+        /* Style for the button */
         #searchWidgetTrigger {
-            padding: 10px;
-            width: 250px;
+            padding: 12px 20px;
             font-size: 16px;
-            border: 1px solid #ccc;
+            background-color: #007BFF;
+            color: white;
+            border: none;
             border-radius: 5px;
-            outline: none;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #searchWidgetTrigger:hover {
+            background-color: #0056b3;
         }
 
         /* Positioning for the widget */
         gen-search-widget {
-            position: absolute;
-            z-index: 9999;
+            position: relative;
+            display: block;
+            width: 100%;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <h3>Search Here:</h3>
+    <h3>Click the button to search:</h3>
+
+    <!-- Search Button to Open Widget -->
+    <button id="searchWidgetTrigger">Open Search</button>
 
     <!-- Search Widget (Hidden by Default) -->
     <gen-search-widget
@@ -45,20 +55,10 @@ search_widget_html = """
         triggerId="searchWidgetTrigger">
     </gen-search-widget>
 
-    <!-- Search Input Field to Open Widget -->
-    <input type="text" placeholder="Search here..." id="searchWidgetTrigger" />
-
-    <script>
-        // Optional: Manually trigger the search widget on input click
-        document.getElementById("searchWidgetTrigger").addEventListener("click", function () {
-            document.querySelector("gen-search-widget").setAttribute("open", "true");
-        });
-    </script>
-
 </body>
 </html>
 """
 
-# Embed the widget inside Streamlit using st.components.v1.html
-st.components.v1.html(search_widget_html, height=300)
+# Embed the widget inside Streamlit
+st.components.v1.html(search_widget_html, height=350)
 
